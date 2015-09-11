@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>GeoExt 3 &mdash; OpenLayers 3 und ExtJS 6 im Zusammenspiel von C. Mayer (INTERGEO 2015 Stuttgart, Germany)</title>
+
+	<meta name="description" content="Slides of the talk GeoExt 3 &mdash; OpenLayers 3 und ExtJS 6 im Zusammenspiel' at INTERGEO 2015 Stuttgart, Germany">
+	<meta name="author" content="Christian Mayer">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="./reveal.js-3.1.0/css/reveal.css">
+	<link rel="stylesheet" href="./reveal.js-3.1.0/css/theme/black.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="./reveal.js-3.1.0/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? './reveal.js-3.1.0/css/print/pdf.css' : './reveal.js-3.1.0/css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="./resources/custom.css">
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h1>GeoExt 3</h1>
+				<h3>OpenLayers 3 und ExtJS 6 im Zusammenspiel</h3>
+				<hr />
+				<img src="./resources/img/gx-logo-plain.png" class="plain" width=200/>
+				<p class="small">Christian Mayer</p>
+				<p class="small">INTERGEO 2015 (OSGeo-Park), Stuttgart, 16.09.2015</p>
+			</section>
+
+			<section id="outline">
+				<h2>Agenda</h2>
+				<ul>
+					<li>Einführung &amp; Vorstellung</li>
+					<li>Die Geschichte von GeoExt</li>
+					<li>Was genau ist GeoExt 3?
+						<ul>
+							<li>Ziele</li>
+							<li>Status / aktueller Stand</li>
+							<li>Beispiele &amp; Features</li>
+						</ul>
+					</li>
+					<li>Ausblick</li>
+				</ul>
+			</section>
+
+			<section>
+				<h1>Einführung &amp; Vorstellung</h1>
+			</section>
+
+			<section id="author-christian-mayer" class="author">
+				<h2>Christian Mayer</h2>
+				<img src="./resources/img/cm.jpg">
+				<ul>
+					<li>Softwareentwickler &amp; -architekt</li>
+					<li>Selbstständiger GIS-Dienstleister (meggsimum)</li>
+					<li>Kernentwickler &amp; Mitglied des PSC GeoExt</li>
+					<li>OSGeo Foundation Charter Member</li>
+					<li>Sprecher auf nat. &amp; intern. Konferenzen</li>
+					<li>♥ OpenSource &amp; GIS / Spatial</li>
+				</ul>
+			</section>
+
+			<section id="about-company-meggsimum">
+				<div class="print-wrap" style="height: 500px;">
+					<h2>meggsimum</h2>
+					<div class="split-info">
+						<div class="part">
+							<img src="./resources/img/meggsimum-logo.png" class="plain contrast" width="192"/>
+							<br /><br />
+							<a class="github" href="https://github.com/meggsimum/">@meggsimum</a><br />
+							<a class="twitter" href="https://twitter.com/meggsimum/">@meggsimum</a>
+						</div>
+						<div class="part">
+							<div class="enumeration">
+								<ul>
+									<li><a href="http://meggsimum.de/">meggsimum.de</a></li>
+									<li>Dienstleistung im Bereich GIS / Webmapping /GDI</li>
+									<li>Dannstadt-Schauernheim</li>
+									<li>Moderne Webmapping-Lösungen</li>
+									<li>Softwarekonzepte und Softwareentwicklung</li>
+									<li>Consulting und Schulungen</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="about-geoext" class="">
+				<h2>GeoExt</h2>
+				<ul>
+					<li>JavaScript Framework für anspruchsvolle WebGIS-Anwendungen</li>
+					<li>Basiert auf OpenLayers and ExtJS</li>
+					<li>Erweitert ExtJS um räumliche Komponenten</li>
+					<li>Integriert Geo-Formate in die Datenhaltung von ExtJS</li>
+					<li>==> "Rich Webmapping Applications"</li>
+					<li>&copy; OSGeo, OpenSource</li>
+					<li><a href="https://github.com/geoext/geoext/commit/e345b6b4c6f78dc1da27de67672ca425f3074f74" target="_blank">Erster Commit</a> 25.03.2009</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>GeoExt…</h3>
+				<div class"no-print">
+					<h3 class="fragment">…ist die <span class="highlight">Verheiratung</span> von ExtJS and OpenLayers</h3>
+					<h3 class="fragment">…ist das <span class="highlight">Kind</span> von ExtJS and OpenLayers</h3>
+					<h3 class="fragment">…<span class="highlight">erweitert/verbessert beide,</span> ExtJS and OpenLayers</h3>
+				</div>
+			</section>
+
+			<section>
+				<h1>Die Geschichte von GeoExt</h1>
+			</section>
+
+			<section id="geoext-1.x" class="">
+				<h2>GeoExt 1.x</h2>
+				<ul>
+					<li>Basiert auf ExtJS <span class="highlight">3.x</span> &amp;
+						OpenLayers <span class="highlight">2.x</span>
+					</li>
+					<li><a href="http://geoext.org/">geoext.org</a></li>
+					<img class="stretch" src="resources/img/geoext-1.png" alt="GeoExt v1.x app screenshot" />
+				</ul>
+			</section>
+
+			<section>
+				<img class="no-print plain stretch"
+				  src="resources/img/so-hot-right-now.jpg" />
+				<img class="print-only"
+				  src="./resources/img/so-hot-right-now.jpg"
+				  height=630 />
+				<p class="small"><a href="https://twitter.com/bitovi/status/631050069903601664">@bitovi on twitter</a></p>
+			</section>
+
+			<section id="geoext-2.0.x" class="">
+				<h2>GeoExt 2.0.x</h2>
+				<ul>
+					<li>Basiert auf ExtJS <span class="highlight">4.x</span> &amp;
+						OpenLayers <span class="highlight">2.x</span>
+					</li>
+					<li><a href="https://geoext.github.io/geoext2/">geoext.github.io/geoext2</a></li>
+					<img class="stretch" src="resources/img/geoext-2.0.png" alt="GeoExt v2.0.x app screenshot" />
+				</ul>
+			</section>
+
+			<section id="geoext-2.0.x-improvements" class="">
+				<h2>GeoExt 2.0.x</h2>
+				<ul>
+					<li>Größte Veränderungen / Verbesserungen</li>
+					<ul>
+						<li>Einführung einer neuen Erzeugungssyntax</li>
+						<li>MVC-Support</li>
+						<li>Einfacheres Styling der Anwendungen</li>
+						<li>Verbesserte API-Dokumentation</li>
+						<li>Kompatibilität zu den Build-Tools von (Dependency-
+							Management, …)
+						</li>
+					</ul>
+				</ul>
+			</section>
+
+			<section id="geoext-2.1.x">
+				<h2>GeoExt 2.1.x (<span class="highlight">beta</span>)</h2>
+				<ul>
+					<li>Basiert auf ExtJS <span class="highlight">4.2.x</span> /
+						ExtJS <span class="highlight">5.1.x</span> OpenLayers
+						<span class="highlight">2.x</span>
+					</li>
+					<li><a href="https://geoext.github.io/geoext2/">geoext.github.io/geoext2</a></li>
+					<img class="stretch" src="resources/img/geoext-2.1.png" alt="GeoExt v2.1.x app screenshot" />
+				</ul>
+			</section>
+
+			<section id="geoext-2.1.x-improvements">
+				<h2>GeoExt 2.1.x</h2>
+				<ul>
+					<li>Größte Veränderungen / Verbesserungen</li>
+					<ul>
+						<li>Unterstützung von 2 Major-Versionen von ExtJS</li>
+						<li>MVVM-Support</li>
+						<li>Two-Way-Binding</li>
+						<li>Verbesserte Unterstützung von Mobil- und Touch-Geräten</li>
+						<li>Responsive Design</li>
+					</ul>
+				</ul>
+			</section>
+
+			<section id="in-the-meantime" class="">
+				<h1>In der Zwischenzeit…</h1>
+
+				<div class="fragment">
+					<h2>OpenLayers <span class="highlight">3</span></h2>
+					<p>&amp;</p>
+					<h2 class="fragment">ExtJS <span class="highlight">6</span></h2>
+				</div>
+				<h1 class="fragment">…erblickten das Licht der Welt</h1>
+			</section>
+
+			<section id="geoext3-codesprint">
+				<div class="print-wrap" style="height: 500px;">
+					<h2>GeoExt 3 Codesprint</h2>
+					<div class="split-info">
+						<div class="part">
+							<img src="./resources/img/geoext-front-black-smaller.png" class="plain contrast" width="280"/>
+							<br /><br />
+							<img src="./resources/img/geoext-sprinters-small.jpg" class="plain contrast" width="280"/>
+						</div>
+						<div class="part">
+							<div class="enumeration">
+								<ul>
+									<li>17.06. - 19.06.2015 in Bonn</li>
+									<li>10 Entwickler aus 4 Ländern</li>
+									<li>Fundament geschaffen für GeoExt 3 auf Basis</li>
+									<ul>
+										<li>OpenLayers 3</li>
+										<li>ExtJS 6</li>
+									</ul>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="geoext3-sponsors">
+				<h2>Sponsoren</h2>
+				<ul>
+					<li>Bistum Eichst&auml;tt</li>
+					<li>Boundless</li>
+					<li>Bundesamt f&uuml;r Strahlenschutz</li>
+					<li>Compass Informatics Ltd</li>
+					<li>ISB AG</li>
+					<li>Landesamt f&uuml;r Geoinformation und Landentwicklung
+						Baden W&uuml;rttemberg
+					</li>
+					<li>Landplan AG</li>
+					<li>meggsimum</li>
+					<li>terrestris GmbH &amp; Co. KG</li>
+				</ul>
+			</section>
+
+			<section>
+				<h1>Was genau ist GeoExt3?</h1>
+			</section>
+
+			<section>
+				<h2>Ziele</h2>
+				<ul>
+					<li>Schaffen einer neuen Codebasis ("from Scratch")</li>
+					<li>Provitieren durch Sencha Tooling (Build / Paketierung)</li>
+					<li>Unabhängigkeit vom Zielgerät (Desktop / Mobile)</li>
+					<!-- <li>Enable access of library objects (e.g. ol3)</li> -->
+					<li>Mehr und modernisierte Beispiele, verbesserte Tests und Dokumentation</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Status / aktueller Stand</h2>
+				<ul>
+					<li>
+						<a href="https://github.com/geoext/geoext3">
+							github.com/geoext/geoext3
+						</a>
+						<span class="ok">✔</span>
+					</li>
+					<li>&gt; 300 Commits<span class="ok">✔</span></li>
+					<li>7 Beitragende<span class="ok">✔</span></li>
+					<li>Build and Paketierung <span class="ok">✔</span></li>
+					<li>82% Test-Abdeckung  <span class="ok">✔</span></li>
+					<li>Gute API-docs <span class="ok">✔</span></li>
+					<li>Einige Beispiele <span class="ok">✔</span></li>
+					<li>BSD ==> GPLv3<span class="ok">✔</span></li>
+					<li>Universal App Beispiel <span class="nope">✗</span></li>
+					<li>0 Releases <span class="nope">✗</span></li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Beispiele &amp; Features</h2>
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					<a href="http://rawgit.com/geoext/geoext3/master/examples/component/map.html">
+						Basic MapComponent Beispiel
+					</a>
+				</p>
+				<img class="no-print stretch"
+				  src="./resources/img/gx3-mapcomponent-example.png"
+				  alt="A basic example of the map component of GeoExt 3" />
+				<img class="print-only"
+				  src="./resources/img/gx3-mapcomponent-example.png"
+				  height=600 />
+			</section>
+			<section>
+				<pre><code data-trim>
+var olMap = new ol.Map({
+    layers: [
+        // …
+    ],
+    view: new ol.View({
+        // …
+    })
+});
+
+var mapComponent = Ext.create('GeoExt.component.Map', {
+    map: olMap
+});</code></pre>
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					<a href="http://rawgit.com/geoext/geoext3/master/examples/component/overviewMap.html">
+						OverviewComponent Beispiel
+					</a>
+				</p>
+				<img class="no-print stretch"
+				  src="./resources/img/gx3-overviewcomponent-example.png"
+				  alt="Two examples of the overview component of GeoExt 3" />
+				<img class="print-only"
+				  src="./resources/img/gx3-overviewcomponent-example.png"
+				  height=600 />
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					<a href="http://rawgit.com/geoext/geoext3/master/Beispiels/tree/tree-legend-simple.html">
+						Themenbaum mit Legenden
+					</a>
+				</p>
+				<img class="no-print stretch"
+				  src="./resources/img/gx3-legend-tree-example.png"
+				  alt="An examples showing legends in a hierarchical layer tree of GeoExt 3" />
+				<img class="print-only"
+				  src="./resources/img/gx3-legend-tree-example.png"
+				  height=600 />
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					<a href="http://rawgit.com/geoext/geoext3/master/examples/print/basic-mapfish.html">
+						Druck-Beispiel (mit MapFish v3)
+					</a>
+				</p>
+				<img class="no-print stretch"
+				  src="./resources/img/gx3-basic-mapfish-print-example.png"
+				  alt="An example showing the MapfishPrintProvider of GeoExt 3 in action" />
+				<img class="print-only"
+				  src="./resources/img/gx3-basic-mapfish-print-example.png"
+				  height=600 />
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					Ergebnis-PDF des Druck-Beispiels
+				</p>
+				<img class="no-print stretch"
+				  src="./resources/img/gx3-basic-mapfish-print-pdf.png"
+				  alt="A screenshot of the generated PDF" />
+				<img class="print-only"
+				  src="./resources/img/gx3-basic-mapfish-print-pdf.png"
+				  height=600 />
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					<a href="http://rawgit.com/geoext/geoext3/master/examples/popup/gx-popup.html">
+						GeoExt Popups
+					</a>
+				</p>
+				<img class="no-print stretch"
+				  src="./resources/img/gx3-popup-example.png"
+				  alt="GeoExt popups on the map" />
+				<img class="print-only"
+				  src="./resources/img/gx3-popup-example.png"
+				  height=600 />
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					<a href="http://rawgit.com/geoext/geoext3/master/examples/renderer/renderer.html">
+						FeatureRenderer
+					</a>
+				</p>
+				<img class="stretch"
+				  src="./resources/img/gx3-feature-renderer.png"
+				  alt="GeoExt feature renderer in action" />
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					<a href="http://rawgit.com/geoext/geoext3/master/examples/renderer/renderer.html">
+						FeatureStore in ExtJS Grids
+					</a>
+				</p>
+				<img class="no-print stretch"
+				  src="./resources/img/gx3-feature-grid-example.png"
+				  alt="Two grids configured with a feature store and feature renderer column" />
+				<img class="print-only"
+				  src="./resources/img/gx3-feature-grid-example.png"
+				  height=600 />
+			</section>
+
+			<section>
+				<p class="small" style="margin: 0;">
+					<a href="http://rawgit.com/geoext/geoext3/master/examples/mapviewform/mapviewform.html">
+						MapView-Formular (Two-Way-Binding)
+					</a>
+				</p>
+				<img class="no-print stretch"
+				  src="./resources/img/gx3-mapview-form-example.png"
+				  alt="Properties of a map view in an editable form" />
+				<img class="print-only"
+				  src="./resources/img/gx3-mapview-form-example.png"
+				  height=600 />
+			</section>
+
+			<section>
+				<h1>Ausblick</h1>
+			</section>
+
+			<section>
+				<h2>Ausblick / zukünftig</h2>
+				<ul>
+					<li>Veröffentlichung von Beta- / Preview-Versionen</li>
+					<li><span class="highlight">Roadmap</span> für die weitere Entwicklung</li>
+					<li><span class="highlight">Mehr Leute</span> begeistern</li>
+					<li>Universal Application</li>
+					<li>Mögliche Untergliederung: GeoExt-<span class="highlight">base</span>, -<span class="highlight">modern</span>, -<span class="highlight">classic</span></li>
+					<li>Kontinuierliche Weiterentwicklung</li>
+					<li>… anschließend Veröffentlichung als <span class="highlight">3.0.0</span></li>
+				</ul>
+			</section>
+
+			<section id="thanks-questions">
+				<h4>Danke!</h4>
+				<hr />
+				<h1 style="font-size:3.0em">Fragen &amp; Anmerkungen?</h1>
+				<hr />
+				<p class="subtle">
+					<a href="#/imprint">Impressum</a>
+				</p>
+			</section>
+
+			<section id="imprint">
+				<h2>Impressum</h2>
+				<h4>Autor</h4>
+				<div style="">
+					<address style="">
+						<strong>Christian Mayer</strong><br />
+						<span style="font-size: smaller;">
+							meggsimum<br />
+							Hauptstraße 165a | 67125 Dannstadt-Schauernheim<br />
+							<a href="mailto:chris@meggsimum.de">chris@meggsimum.de</a>
+						</span>
+					</address>
+				</div>
+				<h4 style="clear:both;">Credits</h4>
+				<div>
+					<p class="small" id="credits">
+						Diese Folien basieren auf dem Vortrag <a
+						href="http://marcjansen.github.io/foss4g-2015/Towards-GeoExt-3-Supporting-both-OpenLayers-3-and-ExtJS-6.html#/">
+						Towards GeoExt 3 &dash; Supporting both OpenLayers 3 and ExtJS 6</a>  von M. Jansen &amp; C. Mayer
+					</p>
+				<h4 style="clear:both;">Lizenz</h4>
+				<div>
+					<p class="small" id="license">
+						Diese Folien sind veröffentlicht unter <a
+						href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA
+						<img src="./resources/img/by-sa.png"
+						style="height: 1.2em; margin: 0 0 -0.25em 0.25em"
+						class="plain" /></a>
+					</p>
+					<p class="small">
+						<a href="http://chrismayer.github.io/intergeo-2015/GeoExt-3-OpenLayers-3-und-ExtJS-6-im-Zusammenspiel.html">Slides (HTML)</a>,
+						<a href="http://chrismayer.github.io/intergeo-2015/GeoExt-3-OpenLayers-3-und-ExtJS-6-im-Zusammenspiel.pdf">Slides (PDF)</a>,
+						<a href="https://github.com/chrismayer/intergeo-2015">git repository</a>
+					</p>
+				</div>
+			</section>
+
+		</div>
+
+	</div> <!-- eof div.reveal -->
+
+	<script src="./reveal.js-3.1.0/lib/js/head.min.js"></script>
+	<script src="./reveal.js-3.1.0/js/reveal.js"></script>
+
+	<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: './reveal.js-3.1.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: './reveal.js-3.1.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: './reveal.js-3.1.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: './reveal.js-3.1.0/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: './reveal.js-3.1.0/plugin/zoom-js/zoom.js', async: true },
+			{ src: './reveal.js-3.1.0/plugin/notes/notes.js', async: true }
+		]
+	});
+
+	</script>
+
+</body>
+</html>
